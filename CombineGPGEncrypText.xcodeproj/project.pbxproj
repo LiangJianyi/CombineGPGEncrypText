@@ -10,6 +10,9 @@
 		790E365826EDEBB600E65654 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365726EDEBB600E65654 /* main.swift */; };
 		790E365F26EDEC6000E65654 /* FilenameId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365E26EDEC6000E65654 /* FilenameId.swift */; };
 		790E366126EDED8D00E65654 /* AlaphabetConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E366026EDED8D00E65654 /* AlaphabetConvertor.swift */; };
+		791C32C726F9C24200945D5E /* AlaphabetConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E366026EDED8D00E65654 /* AlaphabetConvertor.swift */; };
+		791C32C826F9C24200945D5E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365726EDEBB600E65654 /* main.swift */; };
+		791C32C926F9C24200945D5E /* FilenameId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365E26EDEC6000E65654 /* FilenameId.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,10 +32,18 @@
 		790E365726EDEBB600E65654 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		790E365E26EDEC6000E65654 /* FilenameId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilenameId.swift; sourceTree = "<group>"; };
 		790E366026EDED8D00E65654 /* AlaphabetConvertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlaphabetConvertor.swift; sourceTree = "<group>"; };
+		791C32BF26F7683600945D5E /* CombineGPGEncrypTextTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CombineGPGEncrypTextTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		790E365126EDEBB600E65654 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		791C32BC26F7683600945D5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -54,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				790E365426EDEBB600E65654 /* CombineGPGEncrypText */,
+				791C32BF26F7683600945D5E /* CombineGPGEncrypTextTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,6 +100,23 @@
 			productReference = 790E365426EDEBB600E65654 /* CombineGPGEncrypText */;
 			productType = "com.apple.product-type.tool";
 		};
+		791C32BE26F7683600945D5E /* CombineGPGEncrypTextTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 791C32C426F7683600945D5E /* Build configuration list for PBXNativeTarget "CombineGPGEncrypTextTest" */;
+			buildPhases = (
+				791C32BB26F7683600945D5E /* Sources */,
+				791C32BC26F7683600945D5E /* Frameworks */,
+				791C32BD26F7683600945D5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CombineGPGEncrypTextTest;
+			productName = CombineGPGEncrypTextTest;
+			productReference = 791C32BF26F7683600945D5E /* CombineGPGEncrypTextTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -98,6 +127,9 @@
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					790E365326EDEBB600E65654 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					791C32BE26F7683600945D5E = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
 				};
@@ -116,9 +148,20 @@
 			projectRoot = "";
 			targets = (
 				790E365326EDEBB600E65654 /* CombineGPGEncrypText */,
+				791C32BE26F7683600945D5E /* CombineGPGEncrypTextTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		791C32BD26F7683600945D5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		790E365026EDEBB600E65654 /* Sources */ = {
@@ -128,6 +171,16 @@
 				790E365826EDEBB600E65654 /* main.swift in Sources */,
 				790E366126EDED8D00E65654 /* AlaphabetConvertor.swift in Sources */,
 				790E365F26EDEC6000E65654 /* FilenameId.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		791C32BB26F7683600945D5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				791C32C726F9C24200945D5E /* AlaphabetConvertor.swift in Sources */,
+				791C32C826F9C24200945D5E /* main.swift in Sources */,
+				791C32C926F9C24200945D5E /* FilenameId.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +324,42 @@
 			};
 			name = Release;
 		};
+		791C32C526F7683600945D5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = AWKT6W4WWN;
+				INFOPLIST_FILE = CombineGPGEncrypTextTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.janyee.CombineGPGEncrypTextTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		791C32C626F7683600945D5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = AWKT6W4WWN;
+				INFOPLIST_FILE = CombineGPGEncrypTextTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.janyee.CombineGPGEncrypTextTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -288,6 +377,15 @@
 			buildConfigurations = (
 				790E365C26EDEBB600E65654 /* Debug */,
 				790E365D26EDEBB600E65654 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		791C32C426F7683600945D5E /* Build configuration list for PBXNativeTarget "CombineGPGEncrypTextTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				791C32C526F7683600945D5E /* Debug */,
+				791C32C626F7683600945D5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
