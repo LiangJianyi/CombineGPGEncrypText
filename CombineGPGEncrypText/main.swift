@@ -37,6 +37,7 @@ private func combineEncrypText() throws {
     let encrypFilePaths = sortContentOfDirectory()
     for path in encrypFilePaths {
         if FileManager.default.fileExists(atPath: path) {
+            print("合并文件: \(path)")
             let fileUrl = URL(fileURLWithPath: path)
             if let fileHandle = try? FileHandle(forWritingTo: fileUrl) {
                 let fileText = try! String(contentsOf: fileUrl, encoding: cnToEn ? .utf8 : .ascii)
@@ -93,7 +94,7 @@ private func readDirectoryPath(path: String) throws -> String {
     }
 }
 
-func main(arguments: [String]) throws {
+public func main(arguments: [String]) throws {
     switch arguments.count {
     case 1:
         throw CombineGPGEncrypTextError.missingArguments(argumentNames: ["read_directory_path", "write_file_path"])
