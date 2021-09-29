@@ -10,6 +10,7 @@
 		790E365826EDEBB600E65654 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365726EDEBB600E65654 /* main.swift */; };
 		790E365F26EDEC6000E65654 /* FilenameId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365E26EDEC6000E65654 /* FilenameId.swift */; };
 		790E366126EDED8D00E65654 /* AlaphabetConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E366026EDED8D00E65654 /* AlaphabetConvertor.swift */; };
+		790ED4E227047DBD005FAB23 /* CombineGPGTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790ED4E127047DBD005FAB23 /* CombineGPGTest.swift */; };
 		791C32C726F9C24200945D5E /* AlaphabetConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E366026EDED8D00E65654 /* AlaphabetConvertor.swift */; };
 		791C32C826F9C24200945D5E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365726EDEBB600E65654 /* main.swift */; };
 		791C32C926F9C24200945D5E /* FilenameId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365E26EDEC6000E65654 /* FilenameId.swift */; };
@@ -32,11 +33,20 @@
 		790E365726EDEBB600E65654 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		790E365E26EDEC6000E65654 /* FilenameId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilenameId.swift; sourceTree = "<group>"; };
 		790E366026EDED8D00E65654 /* AlaphabetConvertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlaphabetConvertor.swift; sourceTree = "<group>"; };
+		790ED4DF27047DBD005FAB23 /* CombineGPGTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CombineGPGTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		790ED4E127047DBD005FAB23 /* CombineGPGTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineGPGTest.swift; sourceTree = "<group>"; };
 		791C32BF26F7683600945D5E /* CombineGPGEncrypTextTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CombineGPGEncrypTextTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		790E365126EDEBB600E65654 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		790ED4DC27047DBD005FAB23 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -57,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				790E365626EDEBB600E65654 /* CombineGPGEncrypText */,
+				790ED4E027047DBD005FAB23 /* CombineGPGTest */,
 				790E365526EDEBB600E65654 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,6 +77,7 @@
 			children = (
 				790E365426EDEBB600E65654 /* CombineGPGEncrypText */,
 				791C32BF26F7683600945D5E /* CombineGPGEncrypTextTest.xctest */,
+				790ED4DF27047DBD005FAB23 /* CombineGPGTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,6 +90,14 @@
 				790E365E26EDEC6000E65654 /* FilenameId.swift */,
 			);
 			path = CombineGPGEncrypText;
+			sourceTree = "<group>";
+		};
+		790ED4E027047DBD005FAB23 /* CombineGPGTest */ = {
+			isa = PBXGroup;
+			children = (
+				790ED4E127047DBD005FAB23 /* CombineGPGTest.swift */,
+			);
+			path = CombineGPGTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,6 +119,23 @@
 			productName = CombineGPGEncrypText;
 			productReference = 790E365426EDEBB600E65654 /* CombineGPGEncrypText */;
 			productType = "com.apple.product-type.tool";
+		};
+		790ED4DE27047DBD005FAB23 /* CombineGPGTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 790ED4E527047DBD005FAB23 /* Build configuration list for PBXNativeTarget "CombineGPGTest" */;
+			buildPhases = (
+				790ED4DB27047DBD005FAB23 /* Sources */,
+				790ED4DC27047DBD005FAB23 /* Frameworks */,
+				790ED4DD27047DBD005FAB23 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CombineGPGTest;
+			productName = CombineGPGTest;
+			productReference = 790ED4DF27047DBD005FAB23 /* CombineGPGTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		791C32BE26F7683600945D5E /* CombineGPGEncrypTextTest */ = {
 			isa = PBXNativeTarget;
@@ -123,11 +160,14 @@
 		790E364C26EDEBB600E65654 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					790E365326EDEBB600E65654 = {
 						CreatedOnToolsVersion = 12.5.1;
+					};
+					790ED4DE27047DBD005FAB23 = {
+						CreatedOnToolsVersion = 13.0;
 					};
 					791C32BE26F7683600945D5E = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -149,11 +189,19 @@
 			targets = (
 				790E365326EDEBB600E65654 /* CombineGPGEncrypText */,
 				791C32BE26F7683600945D5E /* CombineGPGEncrypTextTest */,
+				790ED4DE27047DBD005FAB23 /* CombineGPGTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		790ED4DD27047DBD005FAB23 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		791C32BD26F7683600945D5E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -171,6 +219,14 @@
 				790E365826EDEBB600E65654 /* main.swift in Sources */,
 				790E366126EDED8D00E65654 /* AlaphabetConvertor.swift in Sources */,
 				790E365F26EDEC6000E65654 /* FilenameId.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		790ED4DB27047DBD005FAB23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				790ED4E227047DBD005FAB23 /* CombineGPGTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +380,50 @@
 			};
 			name = Release;
 		};
+		790ED4E327047DBD005FAB23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AWKT6W4WWN;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.janyee.CombineGPGTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		790ED4E427047DBD005FAB23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AWKT6W4WWN;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.janyee.CombineGPGTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		791C32C526F7683600945D5E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -377,6 +477,15 @@
 			buildConfigurations = (
 				790E365C26EDEBB600E65654 /* Debug */,
 				790E365D26EDEBB600E65654 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		790ED4E527047DBD005FAB23 /* Build configuration list for PBXNativeTarget "CombineGPGTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				790ED4E327047DBD005FAB23 /* Debug */,
+				790ED4E427047DBD005FAB23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
