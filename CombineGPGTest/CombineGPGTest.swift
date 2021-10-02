@@ -4,9 +4,9 @@ import XCTest
 class CombineGPGTest: XCTestCase {
     let readDirPath = "/Users/\(NSUserName())/Desktop/tmp2/"
     let sourceFilePath = "/Users/\(NSUserName())/Documents/Xcode/Swift/CombineGPGEncrypText/test2.txt"
-    let writeFilePath = "/Users/\(NSUserName())/Desktop/"
+    let writeFilePath = "/Users/\(NSUserName())/Desktop/combine.txt"
     
     func testCombine1() {
-        XCTAssertNoThrow(try CombineGPGEncrypText.main(arguments: ["CombineGPGEncrypText", readDirPath, writeFilePath]))
+        XCTAssertNoThrow(try CombineGPGEncrypText.run(arguments: ["CombineGPGEncrypText", readDirPath, writeFilePath]))
     }
 }

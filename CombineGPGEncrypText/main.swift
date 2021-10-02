@@ -92,8 +92,29 @@ final class CombineGPGEncrypText {
             throw CombineGPGEncrypTextError.invalidDirectoryUrl(path: path)
         }
     }
+    
+    private static func parseOptionArguments(arguments: [String]) {
+        for arg in arguments {
+            switch arg {
+            case "printlog":
+                if Self.isPrintLog {
+                    fatalError("错误❌ 重复的参数：\(arg)")
+                } else {
+                    self.isPrintLog = true
+                }
+            case "cn":
+                if Self.cnToEn {
+                    fatalError("错误❌ 重复的参数：\(arg)")
+                } else {
+                    self.cnToEn = true
+                }
+            default:
+                fatalError("无效❌ 的参数：\(arg)")
+            }
+        }
+    }
 
-    public static func main(arguments: [String]) throws {
+    public static func run(arguments: [String]) throws {
         switch arguments.count {
         case 1:
             throw CombineGPGEncrypTextError.missingArguments(argumentNames: ["read_directory_path", "write_file_path"])
@@ -102,38 +123,12 @@ final class CombineGPGEncrypText {
         case 3:
             readDirPath = try readDirectoryPath(path: arguments[1])
             writeFilePath = arguments[2]
-        case 4:
-            readDirPath = try readDirectoryPath(path: arguments[1])
-            writeFilePath = arguments[2]
-        case 5:
-            readDirPath = try readDirectoryPath(path: arguments[1])
-            writeFilePath = arguments[2]
-            if arguments[3] == "printlog" {
-                printLogSwitch = arguments[3]
-            } else {
-                throw CombineGPGEncrypTextError.invalidArguments(argumentNames: [String](arguments[1..<arguments.count]))
-            }
-        case 6:
-            readDirPath = try readDirectoryPath(path: arguments[1])
-            writeFilePath = arguments[2]
-            if arguments[3] == "printlog" {
-                printLogSwitch = arguments[3]
-            } else {
-                throw CombineGPGEncrypTextError.invalidArguments(argumentNames: [String](arguments[1..<arguments.count]))
-            }
-            if arguments[5] == "cn" {
-                cnToEn = true
-            } else {
-                throw CombineGPGEncrypTextError.invalidArguments(argumentNames: [String](arguments[1..<arguments.count]))
-            }
         default:
-            throw CombineGPGEncrypTextError.invalidArguments(argumentNames: [String](arguments[7..<arguments.count]))
+            Self.parseOptionArguments(arguments: [String](arguments[3..<arguments.count]))
         }
         
         try combineEncrypText()
     }
 }
 
-print("开始执行")
-try CombineGPGEncrypText.main(arguments: CommandLine.arguments)
-print("结束")
+try CombineGPGEncrypText.run(arguments: CommandLine.arguments)
