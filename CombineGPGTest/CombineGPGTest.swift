@@ -8,5 +8,8 @@ class CombineGPGTest: XCTestCase {
     
     func testCombine1() {
         XCTAssertNoThrow(try CombineGPGEncrypText.run(arguments: ["CombineGPGEncrypText", readDirPath, writeFilePath]))
+        let sourceUrl = URL(fileURLWithPath: sourceFilePath)
+        let combineUrl = URL(fileURLWithPath: writeFilePath)
+        XCTAssertTrue(String(contentsOf: sourceUrl) == String(contentsOf: combineUrl))
     }
 }

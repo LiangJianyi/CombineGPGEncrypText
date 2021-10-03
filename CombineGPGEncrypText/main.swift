@@ -17,6 +17,19 @@ final class CombineGPGEncrypText {
     private static var isPrintLog: Bool = false
     private static var cnToEn: Bool = false
     
+    private static func writeTextToFile(fileUrl: URL, text: String) throws {
+        if Self.cnToEn {
+            let chinese = String(text.map { alaphabetConvertor($0, .englishToChinese) })
+            print("往 \(fileUrl.absoluteString) 写入\n")
+            printLog(chinese)
+            try chinese.write(to: fileUrl, atomically: false, encoding: .utf8)
+        } else {
+            print("往 \(fileUrl.absoluteString) 写入\n")
+            printLog(text)
+            try text.write(to: fileUrl, atomically: false, encoding: .ascii)
+        }
+    }
+    
     private static func sortContentOfDirectory() -> [String] {
         var filesArray = try! FileManager.default.contentsOfDirectory(atPath: readDirPath!)
         filesArray = filesArray.map{ filename in
@@ -34,24 +47,21 @@ final class CombineGPGEncrypText {
 
     private static func combineEncrypText() throws {
         let encrypFilePaths = sortContentOfDirectory()
+        // 按顺序遍历碎片文件
+        var fileText = ""
         for path in encrypFilePaths {
             if FileManager.default.fileExists(atPath: path) {
                 print("合并文件: \(path)")
-                let fileUrl = URL(fileURLWithPath: path)
-                if let fileHandle = try? FileHandle(forWritingTo: fileUrl) {
-                    let fileText = try! String(contentsOf: fileUrl, encoding: cnToEn ? .utf8 : .ascii)
-                    defer {
-                        fileHandle.closeFile()
-                    }
-                    fileHandle.seekToEndOfFile()
-                    fileHandle.write(fileText.data(using: .utf8)!)
-                } else {
-                    fatalError("Cannot get the FileHandle: \(path)")
-                }
+                // 读取碎片文件内容
+                let enText = try! String(contentsOf: URL(fileURLWithPath: path),
+                                           encoding: cnToEn ? .utf8 : .ascii)
+                fileText += enText
             } else {
                 throw CombineGPGEncrypTextError.invalidFileUrl(path: path)
             }
         }
+        print("合并结束，往 \(Self.writeFilePath!) 写入内容")
+        try Self.writeTextToFile(fileUrl: URL(fileURLWithPath: Self.writeFilePath!), text: fileText)
     }
 
     //private func compareText(sourceFilePath: String, isChinese: Bool = false) -> Bool {
