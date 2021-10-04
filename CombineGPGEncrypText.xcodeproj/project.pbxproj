@@ -11,6 +11,9 @@
 		790E365F26EDEC6000E65654 /* FilenameId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365E26EDEC6000E65654 /* FilenameId.swift */; };
 		790E366126EDED8D00E65654 /* AlaphabetConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E366026EDED8D00E65654 /* AlaphabetConvertor.swift */; };
 		790ED4E227047DBD005FAB23 /* CombineGPGTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790ED4E127047DBD005FAB23 /* CombineGPGTest.swift */; };
+		790ED4FC270B54DF005FAB23 /* AlaphabetConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E366026EDED8D00E65654 /* AlaphabetConvertor.swift */; };
+		790ED4FD270B54DF005FAB23 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365726EDEBB600E65654 /* main.swift */; };
+		790ED4FE270B54DF005FAB23 /* FilenameId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365E26EDEC6000E65654 /* FilenameId.swift */; };
 		791C32C726F9C24200945D5E /* AlaphabetConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E366026EDED8D00E65654 /* AlaphabetConvertor.swift */; };
 		791C32C826F9C24200945D5E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365726EDEBB600E65654 /* main.swift */; };
 		791C32C926F9C24200945D5E /* FilenameId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365E26EDEC6000E65654 /* FilenameId.swift */; };
@@ -226,6 +229,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				790ED4FC270B54DF005FAB23 /* AlaphabetConvertor.swift in Sources */,
+				790ED4FD270B54DF005FAB23 /* main.swift in Sources */,
+				790ED4FE270B54DF005FAB23 /* FilenameId.swift in Sources */,
 				790ED4E227047DBD005FAB23 /* CombineGPGTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
