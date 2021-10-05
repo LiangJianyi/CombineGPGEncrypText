@@ -20,11 +20,9 @@ final class CombineGPGEncrypText {
     private static func writeTextToFile(fileUrl: URL, text: String) throws {
         if Self.cnToEn {
             let chinese = String(text.map { alaphabetConvertor($0, .englishToChinese) })
-            print("往 \(fileUrl.absoluteString) 写入\n")
             printLog(chinese)
             try chinese.write(to: fileUrl, atomically: false, encoding: .utf8)
         } else {
-            print("往 \(fileUrl.absoluteString) 写入\n")
             printLog(text)
             try text.write(to: fileUrl, atomically: false, encoding: .ascii)
         }
@@ -63,24 +61,88 @@ final class CombineGPGEncrypText {
         print("合并结束，往 \(Self.writeFilePath!) 写入内容")
         try Self.writeTextToFile(fileUrl: URL(fileURLWithPath: Self.writeFilePath!), text: fileText)
     }
-
-    //private func compareText(sourceFilePath: String, isChinese: Bool = false) -> Bool {
-    //    // 提取原始文本并去除换行符
-    //    let sourceFileText = try! String(contentsOf: URL(fileURLWithPath: sourceFilePath), encoding: .ascii).filter { $0 != "\n" }
-    //    // 把切割开来的加密文本重新组合为 encrypText，然后去除换行符，再与 sourceFileText 进行对比
-    //    var encrypText = ""
-    //    if isChinese {
-    //        // 中文密文转换为PGP密文
-    //        encrypText = String(
-    //            try! combineEncrypText()
-    //                .filter { $0 != "\n" }
-    //                .map { alaphabetConvertor($0, ConvertMode.chineseToEnglish) }
-    //        )
-    //    } else {
-    //        encrypText = try! combineEncrypText().filter { $0 != "\n" }
-    //    }
-    //    return sourceFileText == encrypText
-    //}
+    
+    private static func combineEncrypTextLineByLine() throws {
+        let encrypFilePaths = sortContentOfDirectory()
+        // 按顺序遍历碎片文件
+        for path in encrypFilePaths {
+            if FileManager.default.fileExists(atPath: path) {
+                print("合并文件: \(path)")
+                
+                // 使用系统调用 fopen 打开并读取文件（参数 r 为读取 flag），返回一个文件指针
+                guard let filePointer: UnsafeMutablePointer<FILE> = fopen(path, "r") else {
+                    fatalError("Could not open file at \(path)")
+                }
+                defer {
+                    #if DEBUG
+                    print("Close the file: \(path)")
+                    #endif
+                    fclose(filePointer)
+                }
+                
+                // a pointer to a null-terminated, UTF-8 encoded sequence of bytes
+                var lineByteArrayPointer: UnsafeMutablePointer<CChar>? = nil
+                
+                // the smallest multiple of 16 that will fit the byte array for this line
+                var lineCap: Int = 0
+                
+                // 初始化迭代器
+                var bytesReader = getline(&lineByteArrayPointer, &lineCap, filePointer)
+                
+                // 逐行读取 path 碎片文件的内容，然后立即把读取的 currentLine 写入 self.writeFilePath
+                let writeFileHandle = FileHandle(forWritingAtPath: Self.writeFilePath!)!
+                defer {
+                    // 关闭文件句柄
+                    #if DEBUG
+                    print("Close the file handler: \(self.writeFilePath!)")
+                    #endif
+                    writeFileHandle.closeFile()
+                }
+                while bytesReader > 0 {
+                    var currentLine = ""
+                    if Self.cnToEn {
+                        currentLine = String(cString: lineByteArrayPointer!, encoding: .utf8)!
+                        currentLine = String(currentLine.map { alaphabetConvertor($0, .chineseToEnglish) })
+                        // 还要把编码转回ascii
+                        // ...
+                    } else {
+                        currentLine = String(cString: lineByteArrayPointer!, encoding: .ascii)!
+                    }
+                    
+                    // 检测合并文件 Self.writeFilePath 是否创建，
+                    // 如果没有创建则在 else 分支创建该文件并把读取
+                    // 的第一行内容 currentLine 写入该文件。
+                    if FileManager.default.fileExists(atPath: Self.writeFilePath!) {
+                        writeFileHandle.seekToEndOfFile()
+                        // 由于把随便文件还原为原始密文，写入文件的编码使用 ascii。
+                        writeFileHandle.write(currentLine.data(using: .ascii)!)
+                        printLog(currentLine)
+                    } else {
+                        print("往 \(Self.writeFilePath!) 写入\n")
+                        // 无需开启 atomically 进行原子写入，
+                        // 当前 else 分支属于该文件暂不存在。
+                        // 由于把随便文件还原为原始密文，写入文件的编码使用 ascii。
+                        try currentLine.write(to: URL(fileURLWithPath: Self.writeFilePath!),
+                                              atomically: false,
+                                              encoding: .ascii
+                        )
+                    }
+                    
+                    // 读取下一行内容
+                    bytesReader = getline(&lineByteArrayPointer, &lineCap, filePointer)
+                }
+                /*
+                 while 循环结束意味着当前 path 碎片文件读取结束，
+                 进入下一轮 for 循环读取下一个 path
+                 */
+                
+            } else {
+                throw CombineGPGEncrypTextError.invalidFileUrl(path: path)
+            }
+        }
+        print("合并结束，往 \(Self.writeFilePath!) 写入内容")
+        try Self.writeTextToFile(fileUrl: URL(fileURLWithPath: Self.writeFilePath!), text: fileText)
+    }
 
     private static func printLog(_ text: String) {
         if let log = printLogSwitch {
