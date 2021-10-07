@@ -103,8 +103,8 @@ final class CombineGPGEncrypText {
                     if Self.cnToEn {
                         currentLine = String(cString: lineByteArrayPointer!, encoding: .utf8)!
                         currentLine = String(currentLine.map { alaphabetConvertor($0, .chineseToEnglish) })
-                        // 还要把编码转回ascii
-                        // ...
+                        // 把 currentLine 写入到文件里使用的 write 函数指定了 ascii 编码，
+                        // 所以无需额外对 currentLine 单独进行 utf8 到 ascii 的转换。
                     } else {
                         currentLine = String(cString: lineByteArrayPointer!, encoding: .ascii)!
                     }
@@ -114,11 +114,12 @@ final class CombineGPGEncrypText {
                     // 的第一行内容 currentLine 写入该文件。
                     if FileManager.default.fileExists(atPath: Self.writeFilePath!) {
                         writeFileHandle.seekToEndOfFile()
-                        // 由于把随便文件还原为原始密文，写入文件的编码使用 ascii。
-                        writeFileHandle.write(currentLine.data(using: .ascii)!)
+                        // 由于把碎片文件还原为原始密文，写入文件的编码使用 ascii。
                         printLog(currentLine)
+                        writeFileHandle.write(currentLine.data(using: .ascii)!)
                     } else {
                         print("往 \(Self.writeFilePath!) 写入\n")
+                        printLog(currentLine)
                         // 无需开启 atomically 进行原子写入，
                         // 当前 else 分支属于该文件暂不存在。
                         // 由于把随便文件还原为原始密文，写入文件的编码使用 ascii。
@@ -141,7 +142,6 @@ final class CombineGPGEncrypText {
             }
         }
         print("合并结束，往 \(Self.writeFilePath!) 写入内容")
-        try Self.writeTextToFile(fileUrl: URL(fileURLWithPath: Self.writeFilePath!), text: fileText)
     }
 
     private static func printLog(_ text: String) {
@@ -199,7 +199,19 @@ final class CombineGPGEncrypText {
             Self.parseOptionArguments(arguments: [String](arguments[3..<arguments.count]))
         }
         
-        try combineEncrypText()
+        let readDirUrl = URL(fileURLWithPath: Self.readDirPath!)
+        let dirSizeOnDisk = try (FileManager
+                                    .default
+                                    .enumerator(at: readDirUrl, includingPropertiesForKeys: nil)?
+                                    .allObjects as! [URL]).lazy.reduce(0) {
+                                        (try $1.resourceValues(forKeys: [.totalFileAllocatedSizeKey]).totalFileAllocatedSize ?? 0) + $0
+                                    }
+        
+        if dirSizeOnDisk > 1000000000 {
+           try combineEncrypTextLineByLine()
+        } else {
+            try combineEncrypText()
+        }
     }
 }
 
