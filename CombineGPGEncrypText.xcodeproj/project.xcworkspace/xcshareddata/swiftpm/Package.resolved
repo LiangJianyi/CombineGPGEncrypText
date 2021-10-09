@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "JanyeeUtilty",
+        "repositoryURL": "https://github.com/LiangJianyi/JanyeeUtilty",
+        "state": {
+          "branch": "master",
+          "revision": "c89e0af7e80594927046ed059b7f0f72fbe940a2",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

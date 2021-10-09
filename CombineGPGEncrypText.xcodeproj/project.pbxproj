@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,8 @@
 		790ED4FC270B54DF005FAB23 /* AlaphabetConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E366026EDED8D00E65654 /* AlaphabetConvertor.swift */; };
 		790ED4FD270B54DF005FAB23 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365726EDEBB600E65654 /* main.swift */; };
 		790ED4FE270B54DF005FAB23 /* FilenameId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365E26EDEC6000E65654 /* FilenameId.swift */; };
+		790ED501270F95F7005FAB23 /* JanyeeUtilty in Frameworks */ = {isa = PBXBuildFile; productRef = 790ED500270F95F7005FAB23 /* JanyeeUtilty */; };
+		790ED504270FB3FE005FAB23 /* JanyeeUtilty in Frameworks */ = {isa = PBXBuildFile; productRef = 790ED503270FB3FE005FAB23 /* JanyeeUtilty */; };
 		791C32C726F9C24200945D5E /* AlaphabetConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E366026EDED8D00E65654 /* AlaphabetConvertor.swift */; };
 		791C32C826F9C24200945D5E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365726EDEBB600E65654 /* main.swift */; };
 		791C32C926F9C24200945D5E /* FilenameId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790E365E26EDEC6000E65654 /* FilenameId.swift */; };
@@ -46,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				790ED501270F95F7005FAB23 /* JanyeeUtilty in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				790ED504270FB3FE005FAB23 /* JanyeeUtilty in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +76,7 @@
 				790E365626EDEBB600E65654 /* CombineGPGEncrypText */,
 				790ED4E027047DBD005FAB23 /* CombineGPGTest */,
 				790E365526EDEBB600E65654 /* Products */,
+				790ED502270FB3FE005FAB23 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +108,13 @@
 			path = CombineGPGTest;
 			sourceTree = "<group>";
 		};
+		790ED502270FB3FE005FAB23 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,6 +131,9 @@
 			dependencies = (
 			);
 			name = CombineGPGEncrypText;
+			packageProductDependencies = (
+				790ED500270F95F7005FAB23 /* JanyeeUtilty */,
+			);
 			productName = CombineGPGEncrypText;
 			productReference = 790E365426EDEBB600E65654 /* CombineGPGEncrypText */;
 			productType = "com.apple.product-type.tool";
@@ -136,6 +151,9 @@
 			dependencies = (
 			);
 			name = CombineGPGTest;
+			packageProductDependencies = (
+				790ED503270FB3FE005FAB23 /* JanyeeUtilty */,
+			);
 			productName = CombineGPGTest;
 			productReference = 790ED4DF27047DBD005FAB23 /* CombineGPGTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -186,6 +204,9 @@
 				Base,
 			);
 			mainGroup = 790E364B26EDEBB600E65654;
+			packageReferences = (
+				790ED4FF270F95F7005FAB23 /* XCRemoteSwiftPackageReference "JanyeeUtilty" */,
+			);
 			productRefGroup = 790E365526EDEBB600E65654 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -508,6 +529,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		790ED4FF270F95F7005FAB23 /* XCRemoteSwiftPackageReference "JanyeeUtilty" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/LiangJianyi/JanyeeUtilty";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		790ED500270F95F7005FAB23 /* JanyeeUtilty */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 790ED4FF270F95F7005FAB23 /* XCRemoteSwiftPackageReference "JanyeeUtilty" */;
+			productName = JanyeeUtilty;
+		};
+		790ED503270FB3FE005FAB23 /* JanyeeUtilty */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 790ED4FF270F95F7005FAB23 /* XCRemoteSwiftPackageReference "JanyeeUtilty" */;
+			productName = JanyeeUtilty;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 790E364C26EDEBB600E65654 /* Project object */;
 }

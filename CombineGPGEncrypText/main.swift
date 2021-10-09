@@ -65,6 +65,7 @@ final class CombineGPGEncrypText {
     private static func combineEncrypTextLineByLine() throws {
         let encrypFilePaths = sortContentOfDirectory()
         // 按顺序遍历碎片文件
+        var currentLine = ""
         for path in encrypFilePaths {
             if FileManager.default.fileExists(atPath: path) {
                 print("合并文件: \(path)")
@@ -99,7 +100,6 @@ final class CombineGPGEncrypText {
                     writeFileHandle.closeFile()
                 }
                 while bytesReader > 0 {
-                    var currentLine = ""
                     if Self.cnToEn {
                         currentLine = String(cString: lineByteArrayPointer!, encoding: .utf8)!
                         currentLine = String(currentLine.map { alaphabetConvertor($0, .chineseToEnglish) })
@@ -109,14 +109,19 @@ final class CombineGPGEncrypText {
                         currentLine = String(cString: lineByteArrayPointer!, encoding: .ascii)!
                     }
                     
+                    // 原始的PGP密文第二行是个空行
+                    if currentLine == "-----BEGIN PGP MESSAGE-----" {
+                        currentLine += "\n"
+                    }
+                    
                     // 检测合并文件 Self.writeFilePath 是否创建，
                     // 如果没有创建则在 else 分支创建该文件并把读取
                     // 的第一行内容 currentLine 写入该文件。
                     if FileManager.default.fileExists(atPath: Self.writeFilePath!) {
-                        writeFileHandle.seekToEndOfFile()
+                        try writeFileHandle.seekToEnd()
                         // 由于把碎片文件还原为原始密文，写入文件的编码使用 ascii。
                         printLog(currentLine)
-                        writeFileHandle.write(currentLine.data(using: .ascii)!)
+                        writeFileHandle.write(contentsOf: currentLine.data(using: .ascii)!)
                     } else {
                         print("往 \(Self.writeFilePath!) 写入\n")
                         printLog(currentLine)
@@ -141,6 +146,11 @@ final class CombineGPGEncrypText {
                 throw CombineGPGEncrypTextError.invalidFileUrl(path: path)
             }
         }
+        // 如果把字符串两边的空白剪掉返回空串，那么currentLine是个空行
+        if currentLine.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) == "" {
+            // 删除掉最后的空行，因为原始PGP密文结尾没有空行
+            
+        }
         print("合并结束，往 \(Self.writeFilePath!) 写入内容")
     }
 
@@ -155,14 +165,14 @@ final class CombineGPGEncrypText {
     }
 
     private static func readDirectoryPath(path: String) throws -> String {
-        var b: ObjCBool = true
         let ptr: UnsafeMutablePointer<ObjCBool> = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1)
-        ptr.initialize(from: &b, count: 1)
+        ptr.initialize(to: true)
         if FileManager.default.fileExists(atPath: path, isDirectory: ptr) {
             return path
         } else {
             throw CombineGPGEncrypTextError.invalidDirectoryUrl(path: path)
         }
+        ptr.deallocate()
     }
     
     private static func parseOptionArguments(arguments: [String]) {
@@ -200,6 +210,7 @@ final class CombineGPGEncrypText {
         }
         
         let readDirUrl = URL(fileURLWithPath: Self.readDirPath!)
+        // Reference: https://stackoverflow.com/a/32814710/10975306
         let dirSizeOnDisk = try (FileManager
                                     .default
                                     .enumerator(at: readDirUrl, includingPropertiesForKeys: nil)?
@@ -207,7 +218,11 @@ final class CombineGPGEncrypText {
                                         (try $1.resourceValues(forKeys: [.totalFileAllocatedSizeKey]).totalFileAllocatedSize ?? 0) + $0
                                     }
         
-        if dirSizeOnDisk > 1000000000 {
+        // 目录大于10MB采用逐行读取
+        if dirSizeOnDisk > 10000000 {
+            #if DEBUG
+            print("目录大于10MB采用逐行读取")
+            #endif
            try combineEncrypTextLineByLine()
         } else {
             try combineEncrypText()
