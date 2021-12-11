@@ -121,7 +121,7 @@ final class CombineGPGEncrypText {
                         try writeFileHandle.seekToEnd()
                         // 由于把碎片文件还原为原始密文，写入文件的编码使用 ascii。
                         printLog(currentLine)
-                        writeFileHandle.write(contentsOf: currentLine.data(using: .ascii)!)
+                        try writeFileHandle.write(contentsOf: currentLine.data(using: .ascii)!)
                     } else {
                         print("往 \(Self.writeFilePath!) 写入\n")
                         printLog(currentLine)
